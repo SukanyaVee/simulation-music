@@ -2,7 +2,7 @@ module.exports=(req,res,next)=>
     {
         if (!req.session.user)
         {
-            request.session.user = {userid:0}
+            req.session.user = {userid:0, current_playing:''}
         }
         next();
     }

@@ -19,25 +19,29 @@ app.use(bodyParser.json());
 app.use(cors());
 
 
-// -----------------USER-----------------
 const userAPIurl = '/api/users'
 
-app.post(`${userAPIurl}/login`, user.get); //works - front & back
-app.post(`${userAPIurl}/create`, user.create); //works - front & back
+app.post(`${userAPIurl}/login`,middleware, user.get); 
+app.post(`${userAPIurl}/create`, user.create); 
 app.put(`${userAPIurl}/:id`, middleware, user.update);  
 app.delete(`${userAPIurl}/logout`, user.logout);
-app.get(`${userAPIurl}/connect`, user.connect);
 
-// -----------------ENTRIES-----------------
 const songAPIurl = '/api/songs'
 
-app.get(`${songAPIurl}/get`, song.getAll); //works - backend only
-app.get(`${songAPIurl}/getone`, song.getOne);// uses query
+app.get(`${songAPIurl}/get`, song.getAll); 
+app.get(`${songAPIurl}/getone/:eid`, song.getOne);
 app.get(`${songAPIurl}/search`, song.search);// uses query
-app.post(songAPIurl, song.create); //works - backend only
-app.put(`${songAPIurl}/:eid`, song.update); // works - backend only
+app.post(songAPIurl, song.create); 
+app.put(`${songAPIurl}/:eid`, song.update); 
 app.delete(`${songAPIurl}/:eid`, song.delete);
 
+const playlistURL = '/api/playlist'
+
+app.get(`${playlistURL}/get`, playlist.getAll); 
+app.get(`${playlistURL}/getone/:pid`, playlist.getOne);
+app.post(playlistURL, playlist.create); 
+app.put(`${playlistURL}/:pid`, playlist.update); 
+app.delete(`${playlistURL}/:pid`, playlist.delete);
 
 
 app.listen(process.env.SERVER_PORT, ()=>console.log('listening on port ' + process.env.SERVER_PORT));

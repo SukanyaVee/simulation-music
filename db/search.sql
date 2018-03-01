@@ -1,0 +1,1 @@
+SELECT * FROM music_sim_songs WHERE title LIKE ANY '%||LOWER($1)||%';
